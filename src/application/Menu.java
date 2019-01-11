@@ -108,12 +108,16 @@ public class Menu {
 		
 	}
 	
+	// lets the user play a game
+	private void playGame() {
+		System.out.println("Sorry, no games yet. Try again later!");
+	}
+	
+	// deletes a user from the database
 	private void deleteUser() {
 		
 	}
 	
-	private void playGame() {
-		System.out.println("Sorry, no games yet. Try again later!");
-	}
+	
 	
 }
