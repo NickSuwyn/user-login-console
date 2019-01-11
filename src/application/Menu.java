@@ -15,16 +15,16 @@ public class Menu {
 		String option = "";
 		
 		System.out.println("Welcome to the UserInfo application.");
-		printLoginWelcome();
+		
 		
 		do {
+			printLoginWelcome();
 			
 			System.out.print(">> ");
 			option = scanner.next();
 			
 			if (option.equals("1")) {
 				login();
-				System.out.println("login");
 			} else if (option.equals("2")) {
 				createNewUser();
 				System.out.println("New User");
@@ -45,17 +45,32 @@ public class Menu {
 	private void userLoginSuccessful() {
 		String option = "";
 		
-		System.out.println("What would you like to do?");
+		System.out.println("Welcome online.");
+		
 		
 		do {
 			
+			printSuccessdulMenuOptions();
+			System.out.print(">> ");
+			option = scanner.next();
+			
 			if (option.equals("1")) {
-				// do something
+				//displayUsers();
 			} else if (option.equals("2")) {
-				// do something
+				playGame();
+			} else if(option.equals("3")) {
+				//deleteUser();
 			}
-
+			
+			else {
+				System.out.println("Please give a valid response.\n");
+				printSuccessdulMenuOptions();
+			}
+			System.out.println("");
+			scanner.nextLine();
+			
 		} while (!option.equals("0"));
+
 	}
 	
 	//prints the login welcome
@@ -64,10 +79,22 @@ public class Menu {
 		System.out.println("1: Log in\n2: Sign up\n0: Quit");
 	}
 	
-	// logs the user into the database
+	//print the loginSuccessfulMenu options
+	public static void printSuccessdulMenuOptions() {
+		System.out.println("What would you like to do today?");
+		System.out.println("1: Display users\n2: Play a game\n3: Delete user"
+				+ "\n0: Log out");
+	}
+	// checks to see if login is correct. If it is, logs the
+	// user into the application 
 	private void login() {
-		// test to see if the login info is correct. If it is, call the
-		// userLoginSuccessful method 
+		// test the login given
+		
+		
+		// if correct, call userLoginSuccessful();
+		System.out.println("--------------------------------------------");
+		userLoginSuccessful();
+		
 	}
 	
 	// adds a new user to the database
@@ -83,6 +110,10 @@ public class Menu {
 	
 	private void deleteUser() {
 		
+	}
+	
+	private void playGame() {
+		System.out.println("Sorry, no games yet. Try again later!");
 	}
 	
 }
