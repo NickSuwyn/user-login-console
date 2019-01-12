@@ -1,11 +1,17 @@
 package application;
 
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
+
+import dao.UserLoginDAO;
+import entity.UserLogin;
 
 public class Menu {
 	
 	//place private objects here
 	private Scanner scanner = new Scanner(System.in);
+	private UserLoginDAO userLoginDAO = new UserLoginDAO();
 	
 	
 	// opens the application to the login screen and leads the user
@@ -16,23 +22,26 @@ public class Menu {
 		
 		System.out.println("Welcome to the UserInfo application.");
 		
-		
 		do {
 			printLoginWelcome();
 			
 			System.out.print(">> ");
 			option = scanner.next();
 			
-			if (option.equals("1")) {
-				login();
-			} else if (option.equals("2")) {
-				createNewUser();
-				System.out.println("New User");
-			} else if (option.equals("0")){
-				
-			}else {
-				System.out.println("Please give a valid response.\n");
-				printLoginWelcome();
+			try {
+				if (option.equals("1")) {
+					login();
+				} else if (option.equals("2")) {
+					createNewUser();
+					System.out.println("New User");
+				} else if (option.equals("0")){
+					
+				}else {
+					System.out.println("Please give a valid response.\n");
+					printLoginWelcome();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 			
 		} while (!option.equals("0"));
@@ -54,18 +63,23 @@ public class Menu {
 			System.out.print(">> ");
 			option = scanner.next();
 			
-			if (option.equals("1")) {
-				//displayUsers();
-			} else if (option.equals("2")) {
-				playGame();
-			} else if(option.equals("3")) {
-				//deleteUser();
+			try {
+				
+				if (option.equals("1")) {
+					displayUsers();
+				} else if (option.equals("2")) {
+					//playGame();
+				} else if(option.equals("3")) {
+					//deleteUser();
+				}else {
+					System.out.println("Please give a valid response.\n");
+					printSuccessdulMenuOptions();
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 			
-			else {
-				System.out.println("Please give a valid response.\n");
-				printSuccessdulMenuOptions();
-			}
 			System.out.println("");
 			scanner.nextLine();
 			
@@ -87,21 +101,38 @@ public class Menu {
 	}
 	// checks to see if login is correct. If it is, logs the
 	// user into the application 
-	private void login() {
+	private void login() throws SQLException {
 		// test the login given
+		System.out.println("Please enter a username and password.");
 		
+		System.out.print("Username>> ");
+		String testUsername = scanner.next();
 		
-		// if correct, call userLoginSuccessful();
-		System.out.println("--------------------------------------------");
-		userLoginSuccessful();
+		System.out.print("Password>> ");
+		String testPassword = scanner.next();
 		
+		List<UserLogin> users = userLoginDAO.getUsers();
+		
+		for (UserLogin user: users) {
+			if (testUsername.equals(user.getUsername())) {
+				if (testPassword.equals(user.getPassword())) {
+					// if correct, call userLoginSuccessful();
+					System.out.println("Login successful.");
+					System.out.println("--------------------------------------------");
+					userLoginSuccessful();
+					break;
+				}				
+			}
+			System.out.println(">>>>>>>ERROR<<<<<<<\n"
+					+ "Username or password inccorect.");
+			System.out.println(">>>>>>>ERROR<<<<<<<\n");	
+		}
 	}
 	
 	// adds a new user to the database
 	private void createNewUser() {
 		
 	}
-	
 	
 	// creates a list of all of the users in the database
 	private void displayUsers() {
