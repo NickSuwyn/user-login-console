@@ -9,7 +9,7 @@ import java.util.List;
 
 import entity.UserLogin;
 
-public class userLoginDAO {
+public class UserLoginDAO {
 	
 	private Connection connection;
 	private final String GET_USERS_QUERY = "SELECT * FROM user_info";
@@ -18,7 +18,7 @@ public class userLoginDAO {
 	private final String DELETE_USER_BY_ID = "DELETE FROM user_info WHERE id = ?";
 	
 	
-	public userLoginDAO() {
+	public UserLoginDAO() {
 		connection = DBConnection.getConnection();
 	}
 	
@@ -52,4 +52,4 @@ public class userLoginDAO {
 	private UserLogin populateUsers(int id, String username, String password) {
 		return new UserLogin(id, username, password);
 	}
-}
+}	
