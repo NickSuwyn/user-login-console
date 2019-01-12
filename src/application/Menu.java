@@ -63,18 +63,23 @@ public class Menu {
 			System.out.print(">> ");
 			option = scanner.next();
 			
-			if (option.equals("1")) {
-				//displayUsers();
-			} else if (option.equals("2")) {
-				playGame();
-			} else if(option.equals("3")) {
-				//deleteUser();
+			try {
+				
+				if (option.equals("1")) {
+					displayUsers();
+				} else if (option.equals("2")) {
+					//playGame();
+				} else if(option.equals("3")) {
+					//deleteUser();
+				}else {
+					System.out.println("Please give a valid response.\n");
+					printSuccessdulMenuOptions();
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 			
-			else {
-				System.out.println("Please give a valid response.\n");
-				printSuccessdulMenuOptions();
-			}
 			System.out.println("");
 			scanner.nextLine();
 			
