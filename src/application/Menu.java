@@ -70,7 +70,7 @@ public class Menu {
 				} else if (option.equals("2")) {
 					//playGame();
 				} else if(option.equals("3")) {
-					//deleteUser();
+					deleteUser();
 				}else {
 					System.out.println("Please give a valid response.\n");
 					printSuccessdulMenuOptions();
@@ -145,8 +145,11 @@ public class Menu {
 	}
 	
 	// deletes a user from the database
-	private void deleteUser() {
-		
+	private void deleteUser() throws SQLException {
+		System.out.print("Enter ID of user to delete: ");
+		int userID = Integer.parseInt(scanner.nextLine());
+		userLoginDAO.deleteUser(userID);
+		System.out.println("User was deleted.");
 	}
 	
 	
