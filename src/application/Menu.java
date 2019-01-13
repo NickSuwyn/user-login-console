@@ -33,7 +33,6 @@ public class Menu {
 					login();
 				} else if (option.equals("2")) {
 					createNewUser();
-					System.out.println("New User");
 				} else if (option.equals("0")){
 					
 				}else {
@@ -68,7 +67,7 @@ public class Menu {
 				if (option.equals("1")) {
 					displayUsers();
 				} else if (option.equals("2")) {
-					//playGame();
+					playGame();
 				} else if(option.equals("3")) {
 					deleteUser();
 				}else {
@@ -123,35 +122,35 @@ public class Menu {
 					break;
 				}				
 			}
-			System.out.println(">>>>>>>ERROR<<<<<<<\n"
-					+ "Username or password inccorect.");
-			System.out.println(">>>>>>>ERROR<<<<<<<\n");	
+		}
+		System.out.println(">>>>>>>ERROR<<<<<<<\n"
+				+ "Username or password inccorect.");
+		System.out.println(">>>>>>>ERROR<<<<<<<\n");	
+	}
+	
+	public void checkStrInput(String str) {
+		if (str.isEmpty()) {
+			System.out.println("Invalid input. Try again human.");
 		}
 	}
 	
 	// adds a new user to the database
 	private void createNewUser() throws SQLException {
 		System.out.print("Enter Username: ");
-		String userName = scanner.nextLine();
-		System.out.println("Enter password: ");
-		String password = scanner.nextLine();
+		String userName = scanner.next();
+		System.out.print("Enter password: ");
+		String password = scanner.next();
 		userLoginDAO.createNewUser(userName, password);
-		System.out.println(userName + "Added to Database");
-				
-		
-		
-		
+		System.out.println(userName + "Added to Database");	
 	}
 	
 	// creates a list of all of the users in the database
 	private void displayUsers() throws SQLException {
 		System.out.println("Current Users: ");
 		List<UserLogin> users = userLoginDAO.getUsers(); 
-	for (UserLogin user: users) {
-		System.out.println(user.getUsername());
-	}
-		
-		
+		for (UserLogin user: users) {
+			System.out.println("\t" + user.getId() + ": " + user.getUsername());
+		}
 		
 	}
 	
@@ -163,7 +162,7 @@ public class Menu {
 	// deletes a user from the database
 	private void deleteUser() throws SQLException {
 		System.out.print("Enter ID of user to delete: ");
-		int userID = Integer.parseInt(scanner.nextLine());
+		int userID = Integer.parseInt(scanner.next());
 		userLoginDAO.deleteUser(userID);
 		System.out.println("User was deleted.");
 	}
