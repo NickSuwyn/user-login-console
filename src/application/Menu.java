@@ -70,7 +70,7 @@ public class Menu {
 				} else if (option.equals("2")) {
 					//playGame();
 				} else if(option.equals("3")) {
-					//deleteUser();
+					deleteUser();
 				}else {
 					System.out.println("Please give a valid response.\n");
 					printSuccessdulMenuOptions();
@@ -130,12 +130,28 @@ public class Menu {
 	}
 	
 	// adds a new user to the database
-	private void createNewUser() {
+	private void createNewUser() throws SQLException {
+		System.out.print("Enter Username: ");
+		String userName = scanner.nextLine();
+		System.out.println("Enter password: ");
+		String password = scanner.nextLine();
+		userLoginDAO.createNewUser(userName, password);
+		System.out.println(userName + "Added to Database");
+				
+		
+		
 		
 	}
 	
 	// creates a list of all of the users in the database
-	private void displayUsers() {
+	private void displayUsers() throws SQLException {
+		System.out.println("Current Users: ");
+		List<UserLogin> users = userLoginDAO.getUsers(); 
+	for (UserLogin user: users) {
+		System.out.println(user.getUsername());
+	}
+		
+		
 		
 	}
 	
@@ -145,8 +161,11 @@ public class Menu {
 	}
 	
 	// deletes a user from the database
-	private void deleteUser() {
-		
+	private void deleteUser() throws SQLException {
+		System.out.print("Enter ID of user to delete: ");
+		int userID = Integer.parseInt(scanner.nextLine());
+		userLoginDAO.deleteUser(userID);
+		System.out.println("User was deleted.");
 	}
 	
 	
