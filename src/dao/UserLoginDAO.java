@@ -13,7 +13,7 @@ public class UserLoginDAO {
 	
 	private Connection connection;
 	private final String GET_USERS_QUERY = "SELECT * FROM user_info";
-	private final String CREATE_NEW_CHILD_QUERY = "INSERT INTO user_info(username, password)"
+	private final String CREATE_NEW_USER_QUERY = "INSERT INTO user_info(username, password)"
 			+ "VALUES(?, ?)";
 	private final String DELETE_USER_BY_ID = "DELETE FROM user_info WHERE id = ?";
 	
@@ -35,7 +35,7 @@ public class UserLoginDAO {
 	
 	// used to create a new user
 	public void createNewUser(String username, String password) throws SQLException {
-		PreparedStatement ps = connection.prepareStatement(CREATE_NEW_CHILD_QUERY);
+		PreparedStatement ps = connection.prepareStatement(CREATE_NEW_USER_QUERY);
 		ps.setString(1, username);
 		ps.setString(2, password);
 		ps.executeUpdate();
